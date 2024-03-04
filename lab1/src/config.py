@@ -25,11 +25,13 @@ def gradient_vector(args) -> np.array:
     '''
     try:
         x = args[0]
+        y = args[1]
     except IndexError:
         raise WrongDimentionError(len(args)+1)
-    gradient = [4*x + 3]
-    return np.array(gradient)
+    grad_x = 1.2*x*np.exp(-x**2-y**2) + 0.8*(x+1.75)*np.exp(-(x+1.75)**2 - (y-1)**2)
+    grad_y = 1.2*y*np.exp(-x**2-y**2) + 0.8*(y-1)*np.exp(-(x+1.75)**2 - (y-1)**2)
+    return np.array([grad_x, grad_y])
 
 
 def dimensions():
-    return 2
+    return 3

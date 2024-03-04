@@ -1,8 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from config import value
-from gradient import gradient_descent
+from .gradient import gradient_descent
+from .config import value
 
 
 def create_3D_plot():
