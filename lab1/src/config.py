@@ -8,6 +8,7 @@ class WrongDimentionError(Exception):
 
 def value(args) -> float:
     '''
+    Sample function_value function to use in gradient_descent()
     Returns function value of x,[y,..] coordinates
     '''
     try:
@@ -20,8 +21,8 @@ def value(args) -> float:
 
 def gradient_vector(args) -> np.array:
     '''
+    Sample generate_gradient function to use in gradient_descent()
     Returns numpy array of gradient coordinates (gradient = vector)
-    x for 1 dim; x,y for 2 dims; x,y,z for 3 dims
     '''
     try:
         x = args[0]
@@ -31,7 +32,3 @@ def gradient_vector(args) -> np.array:
     grad_x = 1.2*x*np.exp(-x**2-y**2) + 0.8*(x+1.75)*np.exp(-(x+1.75)**2 - (y-1)**2)
     grad_y = 1.2*y*np.exp(-x**2-y**2) + 0.8*(y-1)*np.exp(-(x+1.75)**2 - (y-1)**2)
     return np.array([grad_x, grad_y])
-
-
-def dimensions():
-    return 3
