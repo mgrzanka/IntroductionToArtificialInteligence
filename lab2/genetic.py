@@ -44,9 +44,9 @@ class GeneticAlgorithm(Solver):
         # scaling
         minimum = np.min(evaluation)
         maximum = np.max(evaluation)
-        scaled_evaluation = (evaluation - minimum)/(minimum+maximum)
-        if np.sum(scaled_evaluation) == 0:  # all values are the same
-            scaled_evaluation = abs(evaluation)
+        if minimum == maximum:  # all values are the same
+            return starting_population
+        scaled_evaluation = (evaluation - minimum)/(minimum-maximum)
 
         omega = np.sum(scaled_evaluation)
         probabilities = scaled_evaluation / omega
