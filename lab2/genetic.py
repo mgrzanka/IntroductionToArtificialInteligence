@@ -44,7 +44,7 @@ class GeneticAlgorithm(Solver):
         # scaling
         minimum = np.min(evaluation)
         maximum = np.max(evaluation)
-        if minimum == maximum:  # all values are the same
+        if minimum == maximum:  # all values are the same, selection not nessesary
             return starting_population
         scaled_evaluation = (evaluation - minimum)/(minimum-maximum)
 
