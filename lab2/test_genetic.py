@@ -4,14 +4,13 @@ import matplotlib.pyplot as plt
 from evaluate import evaluate
 
 
-
 def test_generic_algorithm():
     # hiperparameters
     pm = 0.05
     pc = 0.95
     t_max = 800
-    individuals_num = 25
-    population = np.random.choice([0, 1], size=(25, 100), p=[0.5, 0.5])
+    individuals_num = 50
+    population = np.random.choice([0, 1], size=(50, 100), p=[0.5, 0.5])
 
     # algorithm initation
     solver = GeneticAlgorithm(pm, pc, t_max)
@@ -101,8 +100,8 @@ def test_t_max_small():
     plt.title("Maximum iterations number impact")
     plt.legend()
     plt.show()
- 
-    
+
+
 def test_t_max_medium():
     # const hiperparameters
     pc = 0.9
