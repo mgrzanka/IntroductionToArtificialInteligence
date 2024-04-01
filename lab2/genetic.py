@@ -82,11 +82,11 @@ class GeneticAlgorithm(Solver):
         return np.array(result)
 
     def _mutate(self, individuals):
-        for indx, individual in enumerate(individuals):
-            draw = np.random.rand()
-            if draw < self._mutation_probability:
-                negated_individual = np.logical_not(individual).astype(int)
-                individuals[indx] = negated_individual
+        for individual in individuals:
+            for gene_index, gene in enumerate(individual):
+                draw = np.random.rand()
+                if draw < self._mutation_probability:
+                    individual[gene_index] = not gene
         return np.array(individuals)
 
     def __find_the_best(self, evaluation: np.array, population: np.array):
