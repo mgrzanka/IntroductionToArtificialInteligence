@@ -35,9 +35,9 @@ def test_game():
 
 
 def test_play_two_bots():
-    game = DotsAndBoxes(depth_bot1=1, depth_bot2=10)
+    game = DotsAndBoxes(depth_bot1=5, depth_bot2=5, dimentions=3, first_player=1)
     game.play_two_bots()
 
 
-test_game()
-# test_play_two_bots()
+# test_game()
+test_play_two_bots()

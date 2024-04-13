@@ -6,14 +6,15 @@ import copy
 class DostsAndBoxesState:
     def __init__(self, player: bool, dimentions: int, state=None, evaluation=0) -> None:
         '''class representing a single Node
-        ::player: 0 for Min, 1 for Max
-        ::state: state of the game in the node
-        ::dimentions: dims of the game board
+        :player: 0 for Min, 1 for Max
+        :state: state of the game in the node
+        :dimentions: dims of the game board
+        :evaluation: evaluation of the state
         '''
         self.player = player
         self.dimentions = dimentions
         self.evaluation = evaluation
-        if not state:
+        if not state:  # if no state was given, generate it as the first one
             self.state = self.generate_first_state()
         else:
             self.state = state
@@ -29,24 +30,26 @@ class DostsAndBoxesState:
 
     def generate_children(self) -> None:
         '''
-        children: states one state under current state
+        children: states one state under current state (next possible moves)
         while generating, it makes the evaluation based on evaluation of the parent and potentialy found box
         '''
         childen = []
         for row_index, row in enumerate(self.state):
             for connection_index, connection in enumerate(row):
                 if connection == -1:
+                    # deepcopies to not change past state
                     child = copy.deepcopy(self.state)
                     new_row = copy.deepcopy(row)
-                    new_row[connection_index] = self.player  # zamieniam -1 na gracza
+
+                    new_row[connection_index] = self.player  # change -1 to player whos turn it is
                     child[row_index] = new_row
-                    boxes = self.find_box(row_index, connection_index)
+                    boxes = self.find_box(row_index, connection_index) # look if moving here generates a box
                     if boxes:
-                        component = len(boxes) if self.player else -len(boxes)
-                        evaluation = self.evaluation + component
-                        childen.append(DostsAndBoxesState(self.player, self.dimentions, child, evaluation))
+                        component = len(boxes) if self.player else -len(boxes)  # len of boxes, because you can score 2 boxes with one move
+                        evaluation = self.evaluation + component  # if it does, add to the past evaluation -1 for min and +1 for max
+                        childen.append(DostsAndBoxesState(self.player, self.dimentions, child, evaluation))  # don't change player for this move, because scoring generates another move for the player
                     else:
-                        childen.append(DostsAndBoxesState(not self.player, self.dimentions, child, self.evaluation))
+                        childen.append(DostsAndBoxesState(not self.player, self.dimentions, child, self.evaluation))  # no score, change player
         return childen
 
     def find_box(self, row_index, column_index) -> np.array[list[np.array]]:
@@ -55,9 +58,9 @@ class DostsAndBoxesState:
         return array of booleans up_down / left_right
         '''
         boxes = []
-        if row_index % 2 == 0:
+        if row_index % 2 == 0:  #
             up_down = [0 if row_index == 0 else 1,
-                       0 if row_index == (2*self.dimentions - 1) - 1 else 1]
+                       0 if row_index == (2*self.dimentions - 1) - 1 else 1]  # in what direction search is possible
             for indx, direction in enumerate(up_down):
                 if direction == 1:  # if it's possible to go either up or down
                     row1 = row_index+2*((-1)**(indx+1))
