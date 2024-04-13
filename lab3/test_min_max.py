@@ -1,5 +1,6 @@
 from State import DostsAndBoxesState
 from Game import DotsAndBoxes
+from matplotlib import pyplot
 
 
 def test_generate_child_states():
