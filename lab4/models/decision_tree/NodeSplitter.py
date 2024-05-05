@@ -152,7 +152,8 @@ class NodeSplitter:
                            the_best_evaluation: float,
                            feature: str) -> Optional[tuple[float, float]]:
         '''
-        Splits node with continuous or discreet data, considering all the possible splits.
+        Splits node with continuous or discreet data, considering all
+            the possible splits.
         Uses <= condition.
         If length of data every possible split is below the limit, returns None
         If this split is not better than the other, returns None
