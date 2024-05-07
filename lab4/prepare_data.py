@@ -60,8 +60,10 @@ class Preparator:
 
         if nans > dropping_value or negatives > dropping_value:
             self.data.drop([column_name], axis=1, inplace=True)
-        elif nans > filling_value or negatives > filling_value:
+        elif nans > filling_value:
             column_data.fillna(column_data.mean(), inplace=True)
+        elif negatives and negatives > filling_value:
+            self.data[self.data[column_name] > 0] = column_data.mean()
         elif negatives:
             self.data = self.data[self.data[column_name] > 0]
         else:
