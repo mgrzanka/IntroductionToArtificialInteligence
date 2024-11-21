@@ -1,4 +1,4 @@
-from genetic import GeneticAlgorithm
+from GeneticAlgorithm.GeneticAlgorithm import GeneticAlgorithm
 import numpy as np
 import matplotlib.pyplot as plt
 from evaluate import evaluate
