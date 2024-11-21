@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from random import uniform
-from gradient import GradientDescent
+from GradientDescend.GradientDescend import GradientDescent
 
 
 def setup2D():
